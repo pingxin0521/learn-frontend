@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>函数的call/apply/bind()</title>
+</head>
+<body>
+  <script src="../../dist/pingxin-utils.js"></script>
+  <script>
+    var m = 11
+    function f(a, b) {
+      console.log(a, b, this.m, this)
+      return a + b
+    }
+
+    const obj = {m: 22}
+
+    /* 测试内置的函数对象的call方法 */
+    // console.log(f.call(obj, 1, 2, 3))
+    // console.log(f.call(undefined, 1, 2, 3))
+    
+    /* 测试内置的函数对象的apply方法 */
+    // console.log(f.apply(obj, [4, 5, 6]))
+    // console.log(f.apply(undefined, [4, 5, 6]))
+    
+    /* 测试内置的函数对象的bind方法 */
+     // const f2 = f.bind(obj)
+    // // console.log(f(1, 2)) // bind()并没有改变函数本身, 接收调用原函数是不会有任何变化的
+    // f2(3, 4) // 必须调用bind返回的新函数, 原函数中的this才是指定的obj
+    // console.log(f.bind(obj, 1)(3, 4))  // 1 3 22 obj   4
+    // console.log(f.bind(obj, 1, 2)(3, 4)) // 1 2, 22 obj  3    注意: 可以暂停视频, 先自己分析一下
+
+    /* ******************************************************** */
+
+    /* 测试自定义call() */
+    console.log(px.func.call(f, obj, 1, 2, 3))
+    console.log(px.func.call(f, undefined, 1, 2, 3))
+    
+    /* 测试自定义apply() */
+    console.log(px.func.apply(f, obj, [1, 2, 3]))
+    console.log(px.func.apply(f, undefined, [1, 2, 3]))
+    
+    
+    /* 测试自定义bind() */
+    console.log(px);
+    console.log(px.func.bind(f, obj)(1, 2))
+    console.log(px.func.bind(f, obj, 3)(1, 2))
+    console.log(px.func.bind(f, obj, 4)(1, 2))
+    console.log(px.func.bind(f, undefined, 4)(1, 2))
+
+  </script>
+</body>
+</html>

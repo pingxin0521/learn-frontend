@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>函数节流与防抖</title>
+</head>
+
+<body>
+
+    <button id="handle">正常处理</button>
+    <button id="throttle">测试函数节流</button>
+    <button id="debounce">测试函数防抖</button>
+
+    <script src="../../dist/pingxin-utils.js"></script>
+    <!-- <script src="../node_modules/atguigu-utils/dist/atguigu-utils.js"></script> -->
+    <script>
+        /* 处理点击事件的回调函数 */
+        function handleClick(event) { // 处理事件的回调
+            console.log('处理点击事件', this, event)
+        }
+
+        document.getElementById('handle').onclick = handleClick
+        document.getElementById('throttle').onclick = px.func.throttle(handleClick, 2000)
+        document.getElementById('debounce').onclick = px.func.debounce(handleClick, 2000)
+    </script>
+
+</body>
+
+</html>

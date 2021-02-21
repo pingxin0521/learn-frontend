@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>手写消息订阅与发布</title>
+</head>
+<body>
+<script src="../../dist/pingxin-utils.js"></script>
+<script>
+  const PubSub = px.PubSub
+  // 订阅消息
+  PubSub.subscribe('add', (data) => {
+    console.log('add()...', data)
+  })
+  PubSub.subscribe('add', (data) => {
+    console.log('add2()...', data)
+  })
+  const token = PubSub.subscribe('add', (data) => {
+    console.log('add3()...', data)
+  })
+  PubSub.subscribe('update', (data) => {
+    console.log('update()...', data)
+  })
+
+  // PubSub.unsubscribe(token)
+  // PubSub.unsubscribe('add')
+  // PubSub.unsubscribe()
+
+  PubSub.publish('add', 12)
+  // PubSub.publish('update', 13)
+  PubSub.publishSync('update', 12)
+  console.log('----')
+</script>
+
+</body>
+</html>

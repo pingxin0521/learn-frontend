@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/lodash.js/4.17.15/lodash.min.js"></script>
+    <script src="../../dist/pingxin-utils.js"></script>
+</head>
+
+<body>
+
+    <script>
+        function Person(name, age) {
+            this.name = name
+            this.age = age
+            // return {}
+            // return []
+            // return function (){}
+            // return 1
+            // return undefined
+        }
+
+        const p = new Person('tom', 12)
+        console.log(p)
+
+        const p2 = px.object.newInstance(Person, 'Jack', 13)
+        console.log(p2, p2.constructor)
+
+
+        console.log(px.object.myInstanceOf(p, Object), p instanceof Object)
+        console.log(px.object.myInstanceOf(p, Person), p instanceof Person)
+        console.log(px.object.myInstanceOf(p, Function), p instanceof Function)
+
+
+        const object = {
+            a: [{
+                x: 2
+            }, {
+                y: 4
+            }],
+            b: 1
+        }
+        const other = {
+            a: {
+                z: 3
+            },
+            b: [2, 3],
+            c: 'foo'
+        }
+        console.log(px.object.mergeObject(object, other))
+
+
+        const obj1 = {
+            x: 'abc',
+            y: {
+                m: 1
+            }
+        }
+        // const obj2 = px.object.clone1(obj1)
+        const obj2 = px.object.clone2(obj1)
+        console.log(obj2, obj2 === obj1, obj2.x === obj1.x, obj2.y === obj1.y)
+
+        const arr1 = ['abc', {
+            m: 1
+        }]
+        // const arr2 = px.object.clone1(arr1)
+        const arr2 = px.object.clone2(arr1)
+        console.log(arr2, arr2 === arr1, arr2[0] === arr1[0], arr2[1] === arr1[1])
+
+        const obj3 = {
+            a: 1,
+            b: ['e', 'f', 'g'],
+            c: {
+                h: {
+                    i: 2
+                }
+            },
+            d: function () {}
+        }
+        obj3.b.push(obj3.c)
+        obj3.c.j = obj3.b
+
+        // const obj4 = _.cloneDeep(obj3)
+        // const obj4 = px.object.deepClone1(obj3)
+        // const obj4 = px.object.deepClone2(obj3)
+        // const obj4 = px.object.deepClone3(obj3)
+        const obj4 = px.object.deepClone4(obj3)
+        console.log(obj4, obj4.c === obj3.c, obj4.d === obj3.d)
+    </script>
+
+</body>
+
+</html>
